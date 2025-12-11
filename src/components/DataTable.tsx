@@ -31,7 +31,7 @@ export default function DataTable<T extends object>({ data, columns, onRowClick 
 
                     {onRowClick && (
                         <td>
-                            <button onClick={() => onRowClick(row)}>Apri Customers</button>
+                            <button onClick={() => onRowClick(row)}>Apri</button>
                         </td>
                     )}
                 </tr>
