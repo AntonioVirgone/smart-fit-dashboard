@@ -19,7 +19,7 @@ export default function CustomersPage() {
         setError(null);
 
         try {
-            const res = await fetch(`${ViteConfig.API_BASE_URL}/customers/${trainerId}`);
+            const res = await fetch(`${ViteConfig.API_BASE_URL}/trainer/${trainerId}/customers`);
 
             if (!res.ok) throw new Error(`Errore HTTP: ${res.status}`);
 
@@ -81,6 +81,20 @@ export default function CustomersPage() {
         fetchCustomers();
     }, [fetchCustomers]);
 
+    const regenerateCode = async (c: Customer) => {
+        const res = await fetch(`${ViteConfig.API_BASE_URL}/trainer/${trainerId}/customer/${c.id}/regenerate-code`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "ngrok-skip-browser-warning": "true",
+            },
+        });
+
+        if (res.ok) {
+            await fetchCustomers(); // aggiorna la lista
+        }
+    };
+
     return (
         <div style={{padding: 20}}>
             <h1>Customers del Trainer</h1>
@@ -127,7 +141,9 @@ export default function CustomersPage() {
                                           onActivate={activateCustomer}
                                           onDeactivate={deactivateCustomer}
                                           onEdit={(c) => console.log("Modifica", c)}
-                                          onDelete={(c) => console.log("Elimina", c)} />
+                                          onDelete={(c) => console.log("Elimina", c)}
+                                          onRegenerateCode={regenerateCode}
+                        />
                     )}
                 </div>
             </div>

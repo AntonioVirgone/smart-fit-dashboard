@@ -6,9 +6,10 @@ type Props = {
     onDeactivate?: (c: Customer) => void;
     onEdit?: (c: Customer) => void;
     onDelete?: (c: Customer) => void;
+    onRegenerateCode?: (c: Customer) => void;
 };
 
-export default function CustomerCardList({ customers, onActivate, onDeactivate, onEdit, onDelete }: Props) {
+export default function CustomerCardList({ customers, onActivate, onDeactivate, onEdit, onDelete, onRegenerateCode }: Props) {
     const getStatusColor = (status?: string) => {
         switch (status) {
             case "active":
@@ -97,9 +98,27 @@ export default function CustomerCardList({ customers, onActivate, onDeactivate, 
                         <strong>✆ Telefono:</strong> {c.phone}
                     </div>
 
-                    <div style={{ marginBottom: 6 }}>
-                        <strong>🔐 Codice:</strong> {c.activationCode}
+                    <div style={{ marginBottom: 6, display: "flex", alignItems: "center" }}>
+                        <strong>🔐 Codice:</strong>
+                        <span style={{ marginLeft: 6 }}>{c.activationCode}</span>
+
+                        {/* Pulsante rigenera */}
+                        <button
+                            style={{
+                                marginLeft: "8px",
+                                padding: "2px 6px",
+                                borderRadius: "4px",
+                                border: "1px solid #aaa",
+                                background: "rgb(38 158 37)",
+                                cursor: "pointer",
+                                fontSize: "12px",
+                            }}
+                            onClick={() => onRegenerateCode?.(c)}
+                        >
+                            Rigenera
+                        </button>
                     </div>
+
 
                     <div style={{ marginBottom: 6 }}>
                         <strong>🔐 Status:</strong> {c.status.toUpperCase()}
