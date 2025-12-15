@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import TrainersPage from "./pages/TrainersPage.tsx";
 import CreateTrainerPage from "./pages/CreateTrainerPage.tsx";
 import CreateCustomerPage from "./pages/CreateCustomerPage.tsx";
+import WorkoutPage from "./pages/WorkoutPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="trainers/:trainerId/customers" element={<CustomersPage />} />
                 <Route path="trainer/create" element={<CreateTrainerPage />} />
                 <Route path="customer/create" element={<CreateCustomerPage />} />
+                <Route path="workout" element={<WorkoutPage />} />
             </Route>
         </Routes>
     </BrowserRouter>
