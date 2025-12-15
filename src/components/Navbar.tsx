@@ -5,7 +5,7 @@ export default function Navbar() {
         <nav>
             <Link to="/" style={{ fontWeight: "bold" }}>🏠 Home</Link>
             <Link to="/trainers">👤 Trainers</Link>
-            <Link to="/trainer/create">➕ Crea Trainer</Link>
+            <Link to="/workout">🔥 Workouts</Link>
         </nav>
     );
 }

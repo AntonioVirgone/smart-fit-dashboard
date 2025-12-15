@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { ViteConfig } from "../config";
 
-export default function CreateTrainerPage() {
+type Props = {
+    onTrainerCreated?: () => void;
+};
+
+export default function CreateTrainerPage({ onTrainerCreated }: Props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,6 +17,7 @@ export default function CreateTrainerPage() {
 
     const submit = async (e: React.FormEvent) => {
         e.preventDefault();
+
         setLoading(true);
         setMessage(null);
 
@@ -33,6 +38,9 @@ export default function CreateTrainerPage() {
             setEmail("");
             setPassword("");
 
+            if (onTrainerCreated) {
+                onTrainerCreated(); // aggiorna la lista nel parent
+            }
         } catch (err: any) {
             setMessage(err.message);
         } finally {
@@ -42,8 +50,6 @@ export default function CreateTrainerPage() {
 
     return (
         <div style={{ padding: 20 }}>
-            <h1>Crea nuovo Trainer</h1>
-
             <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", maxWidth: 400 }}>
                 <label>Nome:</label>
                 <input value={name} onChange={(e) => setName(e.target.value)} required />

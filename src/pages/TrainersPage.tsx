@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import {ViteConfig} from "../config.ts";
-import DataTable from "../components/DataTable.tsx";
 import type {Trainer} from "../types/Trainer.ts";
 import {useNavigate} from "react-router-dom";
+import TrainerCardList from "../components/TrainerCardList.tsx";
+import CreateTrainerPage from "./CreateTrainerPage.tsx";
 
 export default function TrainersPage() {
     const [data, setData] = useState<Trainer[]>([]);
@@ -38,23 +39,60 @@ export default function TrainersPage() {
         navigate(`/trainers/${trainer.id}/customers`);
     };
 
+    console.log(data)
+
     return (
-        <div style={{ padding: 20 }}>
+        <div style={{padding: 20}}>
             <h1>Trainers</h1>
-            {/* Error */}
-            {error && <p style={{ color: "red" }}>{error}</p>}
 
-            {/* Loading */}
-            {loading && <p>Loading...</p>}
+            {error && <p style={{color: "red"}}>{error}</p>}
+            {loading && <p>Caricamento...</p>}
 
-            {/* Table */}
-            {!loading && data.length > 0 &&
-                <DataTable<Trainer>
-                    data={data}
-                    columns={["id", "name", "password", "email"]}
-                    onRowClick={goToCustomers}
-                />
-            }
+            {!loading && data.length === 0 && !error && (
+                <p>Nessun customer trovato per questo trainer.</p>
+            )}
+
+            {/* --- FLEX CONTAINER --- */}
+            <div
+                style={{
+                    display: "flex",
+                    gap: "30px",
+                    marginTop: "20px",
+                    alignItems: "flex-start",
+                }}
+            >
+                {/* --- COLONNA SINISTRA: FORM --- */}
+                <div
+                    style={{
+                        flex: "1",
+                        maxWidth: "350px",
+                        padding: "15px",
+                        border: "1px solid #ddd",
+                        borderRadius: "6px",
+                    }}
+                >
+                    <h2>Crea nuovo Trainer</h2>
+                    <CreateTrainerPage onTrainerCreated={fetchTrainers}/>
+                </div>
+
+                {/* --- COLONNA DESTRA: LISTA CUSTOMER --- */}
+                <div style={{
+                    flex: 2,
+                    padding: "15px",
+                    border: "1px solid #ddd",
+                    borderRadius: "6px",
+                }}>
+                    <h2>Elenco Trainers</h2>
+
+                    {!loading && data.length > 0 && (
+                        <TrainerCardList trainers={data}
+                                         onEdit={(c) => console.log("Modifica", c)}
+                                         onDelete={(c) => console.log("Elimina", c)}
+                                         onCardClick={goToCustomers}
+                        />
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

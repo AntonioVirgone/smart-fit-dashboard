@@ -121,7 +121,7 @@ export default function CustomerCardList({ customers, onActivate, onDeactivate, 
 
 
                     <div style={{ marginBottom: 6 }}>
-                        <strong>🔐 Status:</strong> {c.status.toUpperCase()}
+                        <strong>⚙️ Status:</strong> {c.status.toUpperCase()}
                     </div>
 
                     <hr style={{ margin: "15px 0", opacity: 0.3 }} />
