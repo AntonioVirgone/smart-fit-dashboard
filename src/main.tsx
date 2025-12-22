@@ -7,6 +7,7 @@ import TrainersPage from "./pages/TrainersPage.tsx";
 import CreateTrainerPage from "./pages/CreateTrainerPage.tsx";
 import CreateCustomerPage from "./pages/CreateCustomerPage.tsx";
 import WorkoutPage from "./pages/WorkoutPage.tsx";
+import HistoryPage from "./pages/HistoryPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
                 <Route path="trainer/create" element={<CreateTrainerPage />} />
                 <Route path="customer/create" element={<CreateCustomerPage />} />
                 <Route path="workout" element={<WorkoutPage />} />
+                <Route path="history" element={<HistoryPage />} />
             </Route>
         </Routes>
     </BrowserRouter>

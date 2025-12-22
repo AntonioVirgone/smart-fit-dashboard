@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {ViteConfig} from "../config.ts";
 //import {useNavigate} from "react-router-dom";
-import CreateTrainerPage from "./CreateTrainerPage.tsx";
 import type {Workout} from "../types/workout/Workout.ts";
 import WorkoutCardList from "../components/WorkoutCardList.tsx";
 
@@ -57,20 +56,6 @@ export default function WorkoutPage() {
                     alignItems: "flex-start",
                 }}
             >
-                {/* --- COLONNA SINISTRA: FORM --- */}
-                <div
-                    style={{
-                        flex: "1",
-                        maxWidth: "350px",
-                        padding: "15px",
-                        border: "1px solid #ddd",
-                        borderRadius: "6px",
-                    }}
-                >
-                    <h2>Crea nuovo Workout</h2>
-                    <CreateTrainerPage onTrainerCreated={fetchWorkouts}/>
-                </div>
-
                 {/* --- COLONNA DESTRA: LISTA CUSTOMER --- */}
                 <div style={{
                     flex: 2,
